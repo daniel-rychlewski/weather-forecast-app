@@ -1,0 +1,39 @@
+<div class="details-container" *ngIf="weather">
+  <button (click)="goBack()" class="back-btn">← Back</button>
+
+  <div class="weather-header">
+    <h1>{{ weather.location }}</h1>
+  </div>
+
+  <div class="weather-main">
+    <div class="temperature-large">{{ weather.temperature }}°C</div>
+    <div class="weather-condition">{{ getWeatherCondition(weather.weatherCode) }}</div>
+    <div class="weather-icon-large">{{ getWeatherIcon(weather.weatherCode) }}</div>
+  </div>
+
+  <div class="weather-details">
+    <div class="detail-item">
+      <span class="label">Wind Speed:</span>
+      <span class="value">{{ weather.windSpeed }} km/h</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Humidity:</span>
+      <span class="value">{{ weather.humidity }}%</span>
+    </div>
+  </div>
+
+  <div class="forecast-section" *ngIf="forecast.length > 0">
+    <h3>5-Day Forecast</h3>
+    <div class="forecast-list">
+      <div *ngFor="let day of forecast" class="forecast-item">
+        <div class="date">{{ day.date | date:'EEE, MMM d' }}</div>
+        <div class="forecast-icon">{{ getWeatherIcon(day.weatherCode) }}</div>
+        <div class="temps">
+          <span class="high">{{ day.maxTemp }}°</span>
+          <span class="low">{{ day.minTemp }}°</span>
+        </div>
+        <div class="condition">{{ getWeatherCondition(day.weatherCode) }}</div>
+      </div>
+    </div>
+  </div>
+</div>
